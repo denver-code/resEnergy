@@ -1,12 +1,15 @@
 package com.denvercorp.resdendistrictelectricalnetworks
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.content.pm.PackageManager
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
-import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
@@ -27,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var outputDirectory: File
 
+    private lateinit var editTextBoxInfo: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,6 +76,20 @@ class MainActivity : AppCompatActivity() {
             }
         }, ContextCompat.getMainExecutor(this))
 
+        binding.btnTakePhoto.setOnClickListener{
+//            Toast.makeText(this, "Clicked!", Toast.LENGTH_SHORT).show()
+//            var editTextHello = findViewById<EditText>(R.id.infodata)
+            editTextBoxInfo = findViewById<EditText>(R.id.infodata)
+
+            if (!TextUtils.isEmpty(editTextBoxInfo.text)){
+                takePhoto()
+            } else{
+                Toast.makeText(this, "Please fill input!", Toast.LENGTH_SHORT).show()
+            }
+
+
+        }
+
     }
 
     override fun onRequestPermissionsResult(
@@ -93,10 +111,7 @@ class MainActivity : AppCompatActivity() {
 
        }
 
-        binding.btnTakePhoto.setOnClickListener{
-//            Toast.makeText(this, "Clicked!", Toast.LENGTH_SHORT).show()
-            takePhoto()
-        }
+
 
     }
 
@@ -115,13 +130,13 @@ class MainActivity : AppCompatActivity() {
         val imageCapture = imageCapture ?: return
         val photoFile = File(
             getOutputDirectory(),
-            SimpleDateFormat(
+            editTextBoxInfo.text.toString() + " " + SimpleDateFormat(
                 Constants.FILE_NAME_FORMAT,
-                Locale.getDefault())
+                 Locale.getDefault())
                     .format(
                         System.currentTimeMillis()
                     )
-                    +"someday.jpg"
+                    +".jpg"
         )
 
         val outputOption = ImageCapture
