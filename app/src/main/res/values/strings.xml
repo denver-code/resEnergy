@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">RES DEN District Electrical Networks</string>
-    <string name="username">Info-Data</string>
+    <string name="app_name">RES ENERGY</string>
+    <string name="inputPlaceholder">Опис</string>
+    <string name="takePhoto">Зробити фото</string>
 </resources>
