@@ -154,6 +154,7 @@ class MainActivity : AppCompatActivity() {
                 val msg = "Photo Saved"
 
                 Toast.makeText(this@MainActivity, "$msg $savedUri", Toast.LENGTH_LONG).show()
+                editTextBoxInfo.setText("")
             }
 
             override fun onError(exception: ImageCaptureException){
