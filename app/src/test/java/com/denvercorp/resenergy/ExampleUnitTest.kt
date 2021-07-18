@@ -1,4 +1,4 @@
-package com.denvercorp.resdendistrictelectricalnetworks
+package com.denvercorp.resenergy
 
 import org.junit.Test
 
